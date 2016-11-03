@@ -93,9 +93,9 @@
 
 				<ul>
 					<li ng-repeat="item in showList.items">
-						<span> {{ item.quantity }} {{ item.name }} </span>
+						<span> Buy {{ item.quantity }} {{ item.name }} </span>
 						<button class="btn btn-default" ng-click="showList.buyItem($index)">
-							<span class="glyphicon glyphicon-ok"></span> Buy
+							<span class="glyphicon glyphicon-ok"></span> Bought
 						</button>
 					</li>
 				</ul>
@@ -113,9 +113,9 @@
 			 
 				<ul>
 					<li ng-repeat="item in showList.items">
-						<span> {{ item.quantity }} {{ item.name }} </span>
+						<span> Bought {{ item.quantity }} {{ item.name }} </span>
 						<button class="btn btn-default" ng-click="showList.returnItem($index)">
-							<span class="glyphicon glyphicon-repeat"></span> Return
+							<span class="glyphicon glyphicon-repeat"></span> Returned
 						</button>
 					</li>
 				</ul>
