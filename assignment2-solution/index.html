@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>		
+	
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+	  
+	  .green {
+		color: green;
+	  }
+	  
+	  .red {
+		color: maroon;
+	  }
+	  
+    </style>
+  </head>
+  
+<body ng-app="ShoppingListCheckOff">
+
+	<div class="container" ng-controller="MsgController as parent">
+	
+		<h1>Shopping List Check Off (with bonus features)</h1>
+		
+		<!-- Bonus feature start -->
+		
+		<div class="row" ng-controller="ToBuyController as item">
+		
+			<div class="col-md-6">
+			
+				<div class="row">
+				
+					<div class="col-md-5">
+					
+						<input type="text" ng-model='item.name' placeholder="name" class="form-control">
+					
+					</div>
+					
+					<div class="col-md-2">
+					
+						<input type="text" ng-model='item.quantity' placeholder="q." class="form-control">
+					
+					</div>
+					
+					<div class="col-md-5">
+					
+						<button class="btn btn-default" ng-click="item.addItem()" title="Enter name and quantity to add">
+							<span class="glyphicon glyphicon-plus"></span> Add
+						</button>
+					
+						<button class="btn btn-default" ng-click="item.removeItem()" title="Enter valid name to remove">
+							<span class="glyphicon glyphicon-minus"></span> Remove
+						</button>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="col-md-6"></div>
+			
+		</div>
+		
+		<!-- bonus feature end -->
+				
+		<div class="row">
+
+			<!-- To Buy List -->
+			<div class="col-md-6" ng-controller="ToBuyController as showList">
+				
+				<h2>To Buy:</h2>
+
+				<ul>
+					<li ng-repeat="item in showList.items">
+						<span> {{ item.quantity }} {{ item.name }} </span>
+						<button class="btn btn-default" ng-click="showList.buyItem($index)">
+							<span class="glyphicon glyphicon-ok"></span> Buy
+						</button>
+					</li>
+				</ul>
+				
+				<div class="emptyMessage green" ng-if="parent.msg1">
+					<i class="glyphicon glyphicon-sunglasses" aria-hidden="true"></i> Everything is bought!
+				</div>
+
+			</div>
+
+			<!-- Already Bought List -->
+			<div class="col-md-6" ng-controller="AlreadyBoughtController as showList">
+			
+				<h2>Already Bought:</h2>
+			 
+				<ul>
+					<li ng-repeat="item in showList.items">
+						<span> {{ item.quantity }} {{ item.name }} </span>
+						<button class="btn btn-default" ng-click="showList.returnItem($index)">
+							<span class="glyphicon glyphicon-repeat"></span> Return
+						</button>
+					</li>
+				</ul>
+				
+				<div class="emptyMessage red" ng-if="parent.msg2">
+					<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i> Nothing bought yet.
+				</div>
+				
+			</div>
+		
+		</div>
+		
+	</div>
+
+</body>
+
+</html>
