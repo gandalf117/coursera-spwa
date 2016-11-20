@@ -1,0 +1,14 @@
+<br>
+<h3> {{ curr.title }} </h3>
+<ol>
+  <li ng-repeat="item in curr.items">
+    
+	{{ item.id }} - {{ item.name }} ( {{ item.short_name }} )
+	<br> {{ item.description }} 
+	<br> {{ item.small_portion_name }}: {{ item.price_small }} EUR
+	<br> {{ item.large_portion_name }}: {{ item.price_large }} EUR
+	<br>
+    <button ng-click="curr.onRemove({index: $index});">Don't want this one!</button>
+	<hr>
+  </li>
+</ol>

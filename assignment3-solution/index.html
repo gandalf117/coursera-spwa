@@ -6,7 +6,6 @@
 		<title>Narrow Down Your Menu Choice</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="styles/bootstrap.min.css">
-		<link rel="stylesheet" href="styles/styles.css">
 		
 		<script src="angular.min.js"></script>
 		<script src="app.js"></script>
@@ -27,9 +26,17 @@
 			<button class="btn btn-primary" ng-click="a.findBtnHandler()">Narrow It Down For Me!</button>
 		</div>
 
-		<!-- found-items should be implemented as a component -->
-		<found-items found-items="...." on-remove="...."></found-items>
-	
+		<div>
+		
+			<!-- found-items should be implemented as a component -->
+			<found-items
+				items-found="a.found"
+				title="{{a.title}}"
+				on-remove="a.removeItem(index)">
+			</found-items>
+		
+		</div>
+		
   </div>
 
 </body>

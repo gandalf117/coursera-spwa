@@ -4,36 +4,69 @@
 	angular.module('NarrowItDownApp', [])
 	.controller('NarrowItDownController', NarrowItDownControllerFunc)
 	.service('MenuSearchService', MenuSearchServiceFunc)
-	.constant('ApiBasePath', 'https://davids-restaurant.herokuapp.com');
+	.constant('ApiBasePath', 'https://davids-restaurant.herokuapp.com')
+	.directive('foundItems', FoundItemsDirective);
 
+	function FoundItemsDirective() {
+		
+		var ddo = {
+			templateUrl: 'foundList.html',
+			scope: {
+				items: '<itemsFound',
+				title: '@',
+				onRemove: '&'
+			},
+			controller: NarrowItDownDirectiveController,
+			controllerAs: 'curr',
+			bindToController: true
+		};
+
+		return ddo;
+	
+	}	
+	
+	function NarrowItDownDirectiveController() {}
+	
 	NarrowItDownControllerFunc.$inject = ['$scope', 'MenuSearchService'];
 	
 	function NarrowItDownControllerFunc($scope, service){
 		
 		
-		var item = this;
+		var slf = this;
 		
-		item.search_key = '';
+		slf.search_key = '';
 		
-		item.found = [];
+		slf.found = [];
 		
-		item.findBtnHandler = function() {
+		slf.title = '';
+		
+		slf.findBtnHandler = function() {
 			
-			if(item.search_key) {
+			if(slf.search_key) {
 				
-				var promise = service.getMatchedMenuItems(item.search_key);
+				var promise = service.getMatchedMenuItems(slf.search_key);
 			
 				promise.then(function (response) {
 				
-					item.found = response;
+					slf.found = response;
 					
-					console.log( item.found );
+					slf.title = 'The list of found items contains: ' + slf.found.length + ' items';
+					
+					console.log( slf.found );
 				
 				});
 			
 			}
 			
 		}
+		
+		slf.removeItem = function (itemIndex) {
+			
+			slf.found.splice(itemIndex, 1);
+			
+			slf.title = 'The list of found items contains: ' + slf.found.length + ' items';
+			
+		};		
 		
 	}
 	
