@@ -50,12 +50,22 @@
 				
 					slf.found = response;
 					
-					slf.title = 'The list of found items contains: ' + slf.found.length + ' items';
+					if(slf.found.length > 0) {
 					
-					console.log( slf.found );
+						slf.title = 'The list of found items contains: ' + slf.found.length + ' items';
+					
+					} else {
+						
+						slf.title = 'Nothing found';
+						
+					}
 				
 				});
 			
+			} else {
+						
+				slf.title = 'Nothing found';
+						
 			}
 			
 		}

@@ -1,6 +1,7 @@
 <br>
 <h3> {{ curr.title }} </h3>
 <ol>
+
   <li ng-repeat="item in curr.items">
     
 	{{ item.id }} - {{ item.name }} ( {{ item.short_name }} )
@@ -11,4 +12,5 @@
     <button ng-click="curr.onRemove({index: $index});">Don't want this one!</button>
 	<hr>
   </li>
+  
 </ol>
